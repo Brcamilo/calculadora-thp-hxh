@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Calculadora THP HxH — Independente</title>
+<title>Calculadora THP HxH - Independente</title>
 
 <style>
 :root{
@@ -11,9 +11,9 @@
 --dark:#323d4c;
 --bg:#f4f7fb;
 --line:#dce4ef;
---red:#c62828;
+--yellow:#f2c94c;
 --green:#16834a;
---orange:#b86b00
+--red:#c62828
 }
 
 *{box-sizing:border-box}
@@ -35,11 +35,6 @@ header h1{
 margin:0 0 6px
 }
 
-header p{
-margin:0;
-opacity:.9
-}
-
 .wrap{
 max-width:1250px;
 margin:18px auto;
@@ -55,10 +50,27 @@ margin-bottom:16px;
 box-shadow:0 4px 16px rgba(30,50,80,.07)
 }
 
+.edit{
+background:#fffdf2;
+border:2px solid var(--yellow)
+}
+
+.result{
+background:#fbfcfe;
+border:2px solid #b8c7dc
+}
+
 .grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:12px
+}
+
+label{
+display:block;
+font-size:12px;
+font-weight:700;
+margin-bottom:6px
 }
 
 .input{
@@ -70,15 +82,8 @@ width:100%;
 font-size:16px
 }
 
-label{
-display:block;
-font-size:12px;
-font-weight:700;
-margin-bottom:6px
-}
-
-.btn{
-padding:11px 15px;
+button{
+padding:11px 16px;
 border:0;
 border-radius:10px;
 font-weight:700;
@@ -95,33 +100,32 @@ background:#e8edf5;
 color:var(--dark)
 }
 
-.help{
+.note{
+background:#fff8d8;
+border-left:4px solid var(--yellow);
+padding:10px 12px;
+border-radius:8px;
 font-size:12px;
-color:#69778a;
-line-height:1.5
+line-height:1.5;
+margin-top:10px
 }
 
-.tag{
-display:inline-block;
-padding:6px 9px;
-border-radius:999px;
-font-size:11px;
-font-weight:800
+.info{
+font-size:12px;
+line-height:1.5;
+color:#69778a
 }
 
-.bad{
-background:#ffebee;
-color:var(--red)
+#calcMsg{
+font-size:12px;
+font-weight:700;
+margin-left:10px
 }
 
-.good{
-background:#e9f7ef;
-color:var(--green)
-}
-
-.neutral{
-background:#edf1f5;
-color:#526071
+.timebox{
+font-size:20px;
+font-weight:800;
+margin-top:10px
 }
 
 .table-wrap{
@@ -152,8 +156,27 @@ background:#f7f9fc;
 text-transform:uppercase
 }
 
-td{
-font-size:13px
+.tag{
+display:inline-block;
+padding:6px 9px;
+border-radius:999px;
+font-size:11px;
+font-weight:800
+}
+
+.bad{
+background:#ffebee;
+color:var(--red)
+}
+
+.good{
+background:#e9f7ef;
+color:var(--green)
+}
+
+.neutral{
+background:#edf1f5;
+color:#526071
 }
 
 .cards{
@@ -195,79 +218,6 @@ color:#738094
 font-size:14px
 }
 
-.recovery{
-margin-top:10px;
-padding:10px;
-border-radius:9px;
-background:#fff5e5;
-border-left:4px solid var(--orange);
-font-size:12px
-}
-
-.recovery.ok{
-background:#eef9f3;
-border-left-color:var(--green)
-}
-
-.info{
-background:#f7f9fc;
-border-radius:10px;
-padding:12px;
-margin-top:10px;
-font-size:12px;
-line-height:1.55
-}
-
-.editable-box{
-border:2px solid #f2c94c;
-background:#fffdf2
-}
-
-.editable-title{
-display:flex;
-gap:8px;
-align-items:center
-}
-
-.editable-title:before{
-content:'✏️'
-}
-
-.result-box{
-border:2px solid #b8c7dc;
-background:#fbfcfe
-}
-
-.result-title{
-display:flex;
-gap:8px;
-align-items:center
-}
-
-.result-title:before{
-content:'🔒'
-}
-
-.editable-note{
-background:#fff8d8;
-border-left:4px solid #f2c94c;
-padding:10px 12px;
-border-radius:8px;
-font-size:12px;
-line-height:1.5;
-margin-top:10px
-}
-
-.result-note{
-background:#eef4fb;
-border-left:4px solid #224f9a;
-padding:10px 12px;
-border-radius:8px;
-font-size:12px;
-line-height:1.5;
-margin-top:10px
-}
-
 @media(max-width:900px){
 .grid,.cards{
 grid-template-columns:1fr 1fr
@@ -286,184 +236,233 @@ grid-template-columns:1fr
 
 <header>
 <h1>Calculadora THP HxH</h1>
-<p>Versão independente — campos editáveis separados dos resultados automáticos.</p>
+<p>Versão independente - esperado da hora informado manualmente e cálculo por minuto.</p>
 </header>
 
 <div class="wrap">
 
-<!-- HORÁRIO -->
-<div class="card editable-box">
+<div class="card edit">
 
-<h2 class="editable-title" style="margin-top:0">
-DADOS QUE VOCÊ PODE ALTERAR
-</h2>
-
-<div class="editable-note">
-<b>Altere somente os campos desta área.</b>
-Você pode mudar hora, minuto, metas, REPs e quantidades realizadas.
-Os resultados abaixo são calculados automaticamente.
-</div>
-
-<h3>1. Horário</h3>
+<h2>1. Horário</h2>
 
 <div class="grid">
 
 <div>
 <label>Hora</label>
-<input class="input" id="hour" type="number" min="0" max="23" value="8">
+<input
+class="input"
+id="hour"
+type="number"
+min="0"
+max="23"
+value="8">
 </div>
 
 <div>
 <label>Minuto</label>
-<input class="input" id="minute" type="number" min="0" max="59" value="36">
+<input
+class="input"
+id="minute"
+type="number"
+min="0"
+max="59"
+value="36">
 </div>
 
 </div>
 
-<div class="help" style="margin-top:10px">
-Hora e minuto são entradas manuais.
-Ex.: 08:36 → esperado de 60% da hora.
+<div class="timebox">
+Horário informado:
+<span id="timeDisplay">08:36</span>
+</div>
+
+<div class="info">
+A hora é exibida nos resultados.
+O percentual esperado dentro da hora é calculado pelo minuto:
+minuto ÷ 60.
+Portanto, 08:36 e 09:36 têm 60% do período transcorrido;
+o que muda de uma hora para outra é a meta da hora que você informar.
 </div>
 
 </div>
 
 
-<!-- METAS -->
-<div class="card editable-box">
+<div class="card edit">
 
-<h3 style="margin-top:0">
-2. Metas e REPs por processo
-</h3>
+<h2>2. Metas e REPs por processo</h2>
 
 <div class="grid">
 
 <div>
-<label>Picking — meta</label>
-<input class="input" id="m-p" type="number" min="0" value="1965">
+<label>Picking - meta da hora</label>
+<input
+class="input"
+id="m-p"
+type="number"
+min="0"
+value="1965">
 </div>
 
 <div>
-<label>Picking — REPs</label>
-<input class="input" id="r-p" type="number" min="0" value="25">
+<label>Picking - REPs</label>
+<input
+class="input"
+id="r-p"
+type="number"
+min="0"
+value="25">
 </div>
 
 <div>
-<label>Packing — meta</label>
-<input class="input" id="m-pa" type="number" min="0" value="1382">
+<label>Packing - meta da hora</label>
+<input
+class="input"
+id="m-pa"
+type="number"
+min="0"
+value="1382">
 </div>
 
 <div>
-<label>Packing — REPs</label>
-<input class="input" id="r-pa" type="number" min="0" value="8">
+<label>Packing - REPs</label>
+<input
+class="input"
+id="r-pa"
+type="number"
+min="0"
+value="8">
 </div>
 
 <div>
-<label>Atrelamento — meta</label>
-<input class="input" id="m-a" type="number" min="0" value="706">
+<label>Atrelamento - meta da hora</label>
+<input
+class="input"
+id="m-a"
+type="number"
+min="0"
+value="706">
 </div>
 
 <div>
-<label>Atrelamento — REPs</label>
-<input class="input" id="r-a" type="number" min="0" value="2">
+<label>Atrelamento - REPs</label>
+<input
+class="input"
+id="r-a"
+type="number"
+min="0"
+value="2">
 </div>
 
 <div>
-<label>PutAway — meta</label>
-<input class="input" id="m-pu" type="number" min="0" value="0">
+<label>PutAway - meta da hora</label>
+<input
+class="input"
+id="m-pu"
+type="number"
+min="0"
+value="0">
 </div>
 
 <div>
-<label>PutAway — REPs</label>
-<input class="input" id="r-pu" type="number" min="0" value="0">
+<label>PutAway - REPs</label>
+<input
+class="input"
+id="r-pu"
+type="number"
+min="0"
+value="0">
 </div>
 
 </div>
 
-<div class="editable-note">
-<b>Metas e REPs:</b>
-altere quando os números da operação mudarem.
-A calculadora não acessa nem grava nada na planilha da empresa.
+<div class="note">
+Quando mudar de hora, troque as metas/REPs se os valores da nova hora forem diferentes.
 </div>
 
 </div>
 
 
-<!-- REALIZADO -->
-<div class="card editable-box">
+<div class="card edit">
 
-<h3 style="margin-top:0">
-3. Produção realizada
-</h3>
+<h2>3. Produção realizada</h2>
 
 <div class="grid">
 
 <div>
-<label>Picking — coletado</label>
-<input class="input" id="c-p" type="number" min="0" value="0">
+<label>Picking - coletado</label>
+<input
+class="input"
+id="c-p"
+type="number"
+min="0"
+value="0">
 </div>
 
 <div>
-<label>Packing — coletado</label>
-<input class="input" id="c-pa" type="number" min="0" value="0">
+<label>Packing - coletado</label>
+<input
+class="input"
+id="c-pa"
+type="number"
+min="0"
+value="0">
 </div>
 
 <div>
-<label>Atrelamento — coletado</label>
-<input class="input" id="c-a" type="number" min="0" value="0">
+<label>Atrelamento - coletado</label>
+<input
+class="input"
+id="c-a"
+type="number"
+min="0"
+value="0">
 </div>
 
 <div>
-<label>PutAway — coletado</label>
-<input class="input" id="c-pu" type="number" min="0" value="0">
+<label>PutAway - coletado</label>
+<input
+class="input"
+id="c-pu"
+type="number"
+min="0"
+value="0">
 </div>
 
 </div>
 
-<div class="editable-note">
-<b>Produção realizada:</b>
-digite apenas o que já foi realizado/coletado em cada processo.
+<div class="note">
+Digite a quantidade já realizada/coletada.
 </div>
 
 <div style="margin-top:12px">
 
 <button
 id="btnCalcular"
-class="btn primary"
+class="primary"
 type="button">
 🧮 Calcular
 </button>
 
 <button
 id="btnExemplo"
-class="btn secondary"
+class="secondary"
 type="button">
 Restaurar exemplo 08:36
 </button>
 
-<span
-id="calcMsg"
-class="help"
-style="margin-left:10px;font-weight:700">
-</span>
+<span id="calcMsg"></span>
 
 </div>
 
 </div>
 
 
-<!-- RESULTADOS -->
-<div class="card result-box">
+<div class="card result">
 
-<h2 class="result-title" style="margin-top:0">
-RESULTADOS AUTOMÁTICOS
+<h2>
+4. Resultados automáticos -
+<span id="resultTime">08:36</span>
 </h2>
-
-<div class="result-note">
-<b>Não precisa alterar nada aqui.</b>
-Esta área é recalculada automaticamente sempre que você muda um campo amarelo acima.
-</div>
-
-<h3>Resumo</h3>
 
 <div class="table-wrap">
 
@@ -472,7 +471,6 @@ Esta área é recalculada automaticamente sempre que você muda um campo amarelo
 <thead>
 
 <tr>
-
 <th>Processo</th>
 <th>Meta/h</th>
 <th>REPs</th>
@@ -484,7 +482,6 @@ Esta área é recalculada automaticamente sempre que você muda um campo amarelo
 <th>Δ</th>
 <th>Ritmo necessário/h</th>
 <th>Status</th>
-
 </tr>
 
 </thead>
@@ -498,64 +495,56 @@ Esta área é recalculada automaticamente sempre que você muda um campo amarelo
 </div>
 
 
-<!-- CARDS -->
-<div class="card result-box">
+<div class="card result">
 
-<h3 style="margin-top:0">
-Detalhamento automático
-</h3>
+<h2>Detalhamento</h2>
 
 <div class="cards" id="cards"></div>
 
 </div>
 
 
-<!-- EXPLICAÇÃO -->
-<div class="card result-box">
+<div class="card result">
 
-<h3 style="margin-top:0">
-Entenda os resultados
-</h3>
+<h2>Como funciona</h2>
 
 <div class="info">
-<b>Esperado %:</b>
-minutos decorridos ÷ 60.
-Em 08:36, são 36 ÷ 60 = 60%.
-</div>
 
-<div class="info">
-<b>Esperado agora:</b>
+<b>Esperado %</b> = minuto ÷ 60.
+Em 09:36, são 36 ÷ 60 = 60%.
+
+<br><br>
+
+<b>Esperado agora</b> =
 meta da hora × esperado %.
-Ex.: 1.965 × 60% = 1.179.
-</div>
 
-<div class="info">
-<b>Falta:</b>
-esperado agora − realizado,
-considerando somente o valor positivo.
-</div>
+<br><br>
 
-<div class="info">
-<b>Δ:</b>
-percentual realizado − percentual esperado.
-</div>
+<b>Falta</b> =
+esperado agora - realizado,
+sem ficar negativa.
 
-<div class="info">
-<b>Ritmo necessário/h:</b>
+<br><br>
+
+<b>Realizado %</b> =
+realizado ÷ meta da hora.
+
+<br><br>
+
+<b>Δ</b> =
+realizado % - esperado %.
+
+<br><br>
+
+<b>Ritmo necessário/h</b> =
 falta ÷ horas restantes.
-Ex.: 198 unidades ÷ 0,4 h = 495 unid/h.
-</div>
 
-<div class="info">
-<b>Status:</b>
-mantém a lógica original informada para a calculadora.
-Packing possui a regra invertida em relação aos demais processos.
-</div>
+<br><br>
 
-<div class="info">
-<b>Importante:</b>
-esta versão é independente.
-Ela não lê, não escreve e não modifica sua planilha corporativa.
+A hora é importante para identificar qual período você está acompanhando.
+Como as metas são digitadas manualmente, a troca de hora não altera a matemática
+se o minuto e a meta permanecerem iguais.
+
 </div>
 
 </div>
@@ -565,11 +554,13 @@ Ela não lê, não escreve e não modifica sua planilha corporativa.
 
 <script>
 
-function v(id){
+function n(id){
 
-return Number(
-document.getElementById(id).value
-)||0;
+const el=document.getElementById(id);
+
+const value=Number(el.value);
+
+return Number.isFinite(value)?value:0;
 
 }
 
@@ -593,7 +584,7 @@ x*100
 }
 
 
-function spct(x){
+function deltaPct(x){
 
 return (
 x>=0?'+':''
@@ -607,65 +598,82 @@ x*100
 }
 
 
+function getTime(){
+
+let h=Math.trunc(n('hour'));
+
+let m=Math.trunc(n('minute'));
+
+h=Math.max(0,Math.min(23,h));
+
+m=Math.max(0,Math.min(59,m));
+
+document.getElementById('hour').value=h;
+
+document.getElementById('minute').value=m;
+
+return {
+
+h,
+m,
+text:
+String(h).padStart(2,'0')
++
+':'
++
+String(m).padStart(2,'0')
+
+};
+
+}
+
+
 function calcProc(
 name,
 meta,
 reps,
 col,
-invert
+invert,
+expPct
 ){
-
-const min=Math.max(
-0,
-Math.min(
-59,
-v('minute')
-)
-);
-
-const expPct=min/60;
 
 const exp=meta*expPct;
 
 const realPct=
-meta
+meta>0
 ?col/meta
 :0;
 
 const delta=
 realPct-expPct;
 
-const ritmo=
-col-exp;
-
 const falta=
-Math.max(
-0,
-exp-col
-);
+Math.max(0,exp-col);
 
 const rest=
-60-min;
+60-getTime().m;
 
 const needed=
-falta&&rest
-?falta/(rest/60)
-:0;
+(falta>0 && rest>0)
+?
+falta/(rest/60)
+:
+0;
 
 let status;
 
-if(Math.abs(ritmo)<1e-9){
+if(Math.abs(delta)<0.0000001){
 
 status='Ritmo perfeito';
 
 }else{
 
 status=
-(invert
-?ritmo>0
-:ritmo<0)
-?'Atrasado'
-:'Adiantado';
+(invert?delta>0:delta<0)
+?
+'Atrasado'
+:
+'Adiantado';
 
 }
 
@@ -689,58 +697,152 @@ status
 }
 
 
-function render(r){
+function statusClass(s){
 
-const cls=
-r.status==='Atrasado'
-?'bad'
-:
-r.status==='Adiantado'
-?'good'
-:'neutral';
-
-const rec=
-r.status==='Atrasado'
-
+return s==='Atrasado'
 ?
-
-(
-r.rest
-
-?
-
-`<div class="recovery">
-<b>🚀 Recuperação:</b>
-faltam <b>${fmt(r.falta)}</b> unidades.
-É necessário manter cerca de
-<b>${fmt(r.needed)} unid/h</b>
-(${(r.needed/60).toFixed(1).replace('.',',')} unid/min).
-</div>`
-
+'bad'
 :
+s==='Adiantado'
+?
+'good'
+:
+'neutral';
 
-`<div class="recovery">
-<b>⏱ Hora encerrada:</b>
-faltam ${fmt(r.falta)} unidades.
-</div>`
+}
 
+
+function calcular(){
+
+const t=getTime();
+
+const expPct=t.m/60;
+
+document.getElementById('timeDisplay')
+.textContent=t.text;
+
+document.getElementById('resultTime')
+.textContent=t.text;
+
+
+const rows=[
+
+calcProc(
+'Picking',
+n('m-p'),
+n('r-p'),
+n('c-p'),
+false,
+expPct
+),
+
+calcProc(
+'Packing',
+n('m-pa'),
+n('r-pa'),
+n('c-pa'),
+true,
+expPct
+),
+
+calcProc(
+'Atrelamento',
+n('m-a'),
+n('r-a'),
+n('c-a'),
+false,
+expPct
+),
+
+calcProc(
+'PutAway',
+n('m-pu'),
+n('r-pu'),
+n('c-pu'),
+false,
+expPct
 )
 
+];
+
+
+document.getElementById('body')
+.innerHTML=rows.map(r=>`
+
+<tr>
+
+<td>
+<b>${r.name}</b>
+</td>
+
+<td>
+${fmt(r.meta)}
+</td>
+
+<td>
+${fmt(r.reps)}
+</td>
+
+<td>
+${fmt(r.col)}
+</td>
+
+<td>
+${pct(r.expPct)}
+</td>
+
+<td>
+${fmt(r.exp)}
+</td>
+
+<td>
+${fmt(r.falta)}
+</td>
+
+<td>
+${pct(r.realPct)}
+</td>
+
+<td>
+${deltaPct(r.delta)}
+</td>
+
+<td>
+${
+r.status==='Atrasado'&&r.rest
+?
+fmt(r.needed)+' unid/h'
 :
+'—'
+}
+</td>
 
-`<div class="recovery ok">
-<b>✓</b>
-Não precisa recuperar neste momento.
-</div>`;
+<td>
 
-return `
+<span class="tag ${statusClass(r.status)}">
+
+${r.status}
+
+</span>
+
+</td>
+
+</tr>
+
+`).join('');
+
+
+document.getElementById('cards')
+.innerHTML=rows.map(r=>`
 
 <div class="proc">
 
 <h3>${r.name}</h3>
 
-<span class="tag ${cls}">
+<span class="tag ${statusClass(r.status)}">
+
 ${r.status}
+
 </span>
 
 <div class="metrics">
@@ -772,179 +874,55 @@ ${r.status}
 
 <div class="m">
 <span>Δ</span>
-<b>${spct(r.delta)}</b>
+<b>${deltaPct(r.delta)}</b>
 </div>
 
 </div>
 
-${rec}
-
 </div>
-
-`;
-
-}
-
-
-function calcular(){
-
-const rows=[
-
-calcProc(
-'Picking',
-v('m-p'),
-v('r-p'),
-v('c-p'),
-false
-),
-
-calcProc(
-'Packing',
-v('m-pa'),
-v('r-pa'),
-v('c-pa'),
-true
-),
-
-calcProc(
-'Atrelamento',
-v('m-a'),
-v('r-a'),
-v('c-a'),
-false
-),
-
-calcProc(
-'PutAway',
-v('m-pu'),
-v('r-pu'),
-v('c-pu'),
-false
-)
-
-];
-
-
-document.getElementById('body')
-.innerHTML=
-
-rows.map(r=>`
-
-<tr>
-
-<td>
-<b>${r.name}</b>
-</td>
-
-<td>${fmt(r.meta)}</td>
-
-<td>${fmt(r.reps)}</td>
-
-<td>${fmt(r.col)}</td>
-
-<td>${pct(r.expPct)}</td>
-
-<td>${fmt(r.exp)}</td>
-
-<td>${fmt(r.falta)}</td>
-
-<td>${pct(r.realPct)}</td>
-
-<td>${spct(r.delta)}</td>
-
-<td>
-${
-r.status==='Atrasado'&&r.rest
-?
-fmt(r.needed)+' unid/h'
-:
-'—'
-}
-</td>
-
-<td>
-
-<span class="tag ${
-r.status==='Atrasado'
-?'bad'
-:
-r.status==='Adiantado'
-?'good'
-:'neutral'
-}">
-
-${r.status}
-
-</span>
-
-</td>
-
-</tr>
 
 `).join('');
 
 
-document.getElementById('cards')
-.innerHTML=
-rows.map(render).join('');
-
-
-const msg=
-document.getElementById('calcMsg');
-
-if(msg){
-
-msg.textContent=
-'✓ Calculado agora';
-
-}
+document.getElementById('calcMsg')
+.textContent=
+'✓ Calculado às '+t.text;
 
 }
 
 
 function exemplo(){
 
-const vals={
+const values={
 
 hour:8,
-
 minute:36,
 
 'm-p':1965,
-
 'r-p':25,
 
 'm-pa':1382,
-
 'r-pa':8,
 
 'm-a':706,
-
 'r-a':2,
 
 'm-pu':0,
-
 'r-pu':0,
 
 'c-p':981,
-
 'c-pa':335,
-
 'c-a':582,
-
 'c-pu':0
 
 };
 
 
-for(
-const k in vals
-){
-
-document.getElementById(k)
-.value=vals[k];
-
-}
+Object.entries(values)
+.forEach(
+([id,v])=>
+document.getElementById(id).value=v
+);
 
 calcular();
 
@@ -954,8 +932,8 @@ calcular();
 document
 .querySelectorAll('input')
 .forEach(
-x=>
-x.addEventListener(
+el=>
+el.addEventListener(
 'input',
 calcular
 )
