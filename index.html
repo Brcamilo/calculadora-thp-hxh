@@ -3,231 +3,561 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Calculadora THP HxH - Independente</title>
+<title>Calculadora THP HxH — Bruna Camilo</title>
 
 <style>
 :root{
---blue:#224f9a;
---dark:#323d4c;
---bg:#f4f7fb;
---line:#dce4ef;
---yellow:#f2c94c;
---green:#16834a;
---red:#c62828
+  --blue:#224f9a;
+  --dark:#323d4c;
+  --bg:#f4f7fb;
+  --line:#dce4ef;
+  --yellow:#f2c94c;
+  --green:#16834a;
+  --red:#c62828;
+  --orange:#d97706;
+  --muted:#6b7788;
+  --white:#fff
 }
 
 *{box-sizing:border-box}
 
 body{
-margin:0;
-background:var(--bg);
-color:var(--dark);
-font-family:Arial,sans-serif
+  margin:0;
+  background:var(--bg);
+  color:var(--dark);
+  font-family:Arial,sans-serif
 }
 
 header{
-background:linear-gradient(135deg,#224f9a,#17376f);
-color:#fff;
-padding:22px
+  background:linear-gradient(135deg,#224f9a,#17376f);
+  color:#fff;
+  padding:22px
 }
 
 header h1{
-margin:0 0 6px
+  margin:0 0 6px;
+  font-size:28px
+}
+
+header p{
+  margin:0;
+  opacity:.9
 }
 
 .wrap{
-max-width:1250px;
-margin:18px auto;
-padding:0 15px
+  max-width:1280px;
+  margin:18px auto;
+  padding:0 15px
+}
+
+.footer{
+  text-align:center;
+  padding:24px 15px 30px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700
 }
 
 .card{
-background:#fff;
-border:1px solid var(--line);
-border-radius:16px;
-padding:18px;
-margin-bottom:16px;
-box-shadow:0 4px 16px rgba(30,50,80,.07)
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:16px;
+  box-shadow:0 4px 16px rgba(30,50,80,.07)
+}
+
+.card h2,.card h3{
+  margin:0 0 12px
 }
 
 .edit{
-background:#fffdf2;
-border:2px solid var(--yellow)
+  background:#fffdf2;
+  border:2px solid var(--yellow)
 }
 
 .result{
-background:#fbfcfe;
-border:2px solid #b8c7dc
+  background:#fbfcfe;
+  border:2px solid #b8c7dc
 }
 
 .grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px
+}
+
+.grid3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px
 }
 
 label{
-display:block;
-font-size:12px;
-font-weight:700;
-margin-bottom:6px
+  display:block;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:6px
 }
 
-.input{
-background:#fffbea;
-border:2px solid #e3bd3a;
-border-radius:10px;
-padding:11px;
-width:100%;
-font-size:16px
+.input,select{
+  background:#fffbea;
+  border:2px solid #e3bd3a;
+  border-radius:10px;
+  padding:11px;
+  width:100%;
+  font-size:16px
 }
 
 button{
-padding:11px 16px;
-border:0;
-border-radius:10px;
-font-weight:700;
-cursor:pointer
+  padding:11px 16px;
+  border:0;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer
 }
 
 .primary{
-background:var(--blue);
-color:#fff
+  background:var(--blue);
+  color:#fff
 }
 
 .secondary{
-background:#e8edf5;
-color:var(--dark)
+  background:#e8edf5;
+  color:var(--dark)
 }
 
-.note{
-background:#fff8d8;
-border-left:4px solid var(--yellow);
-padding:10px 12px;
-border-radius:8px;
-font-size:12px;
-line-height:1.5;
-margin-top:10px
+.danger{
+  background:#fbe8e8;
+  color:var(--red)
 }
 
-.info{
-font-size:12px;
-line-height:1.5;
-color:#69778a
+.row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center
 }
 
-#calcMsg{
-font-size:12px;
-font-weight:700;
-margin-left:10px
+.time{
+  font-size:30px;
+  font-weight:800;
+  color:var(--blue)
 }
 
-.timebox{
-font-size:20px;
-font-weight:800;
-margin-top:10px
+.small{
+  font-size:12px;
+  color:var(--muted)
 }
 
-.table-wrap{
-overflow:auto
+.badge{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  font-weight:800;
+  font-size:13px
 }
 
-table{
-width:100%;
-min-width:1100px;
-border-collapse:collapse
+.green{
+  background:#dff4e8;
+  color:var(--green)
 }
 
-th,td{
-padding:10px;
-border-bottom:1px solid var(--line);
-text-align:right
+.red{
+  background:#fde2e2;
+  color:var(--red)
 }
 
-th:first-child,
-td:first-child{
-text-align:left
+.yellow{
+  background:#fff1c7;
+  color:#8a6500
 }
 
-th{
-font-size:11px;
-color:#69778a;
-background:#f7f9fc;
-text-transform:uppercase
+.gray{
+  background:#e9edf2;
+  color:#667085
 }
 
-.tag{
-display:inline-block;
-padding:6px 9px;
-border-radius:999px;
-font-size:11px;
-font-weight:800
-}
-
-.bad{
-background:#ffebee;
-color:var(--red)
-}
-
-.good{
-background:#e9f7ef;
-color:var(--green)
-}
-
-.neutral{
-background:#edf1f5;
-color:#526071
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px
+.proc-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px
 }
 
 .proc{
-border:1px solid var(--line);
-border-radius:13px;
-padding:14px
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:17px
+}
+
+.proc-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px
 }
 
 .proc h3{
-margin:0 0 10px
+  margin:0
 }
 
-.metrics{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:8px;
-margin-top:10px
+.bar{
+  height:14px;
+  background:#e9edf3;
+  border-radius:99px;
+  overflow:hidden;
+  margin:12px 0
 }
 
-.m{
-background:#f7f9fc;
-border-radius:8px;
-padding:8px
+.fill{
+  height:100%;
+  width:0;
+  background:var(--blue);
+  transition:.2s
 }
 
-.m span{
-display:block;
-font-size:10px;
-color:#738094
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px
 }
 
-.m b{
-font-size:14px
+.stat{
+  background:#f6f8fb;
+  border-radius:10px;
+  padding:10px
+}
+
+.stat b{
+  display:block;
+  font-size:17px;
+  margin-top:3px
+}
+
+.individual{
+  margin-top:8px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px
+}
+
+.individual .ind{
+  background:#eef5ff;
+  border:1px solid #c9d9ef;
+  border-radius:10px;
+  padding:10px
+}
+
+.individual .ind span{
+  display:block;
+  font-size:12px;
+  color:var(--muted)
+}
+
+.individual .ind strong{
+  display:block;
+  margin-top:3px;
+  font-size:16px;
+  color:var(--blue)
+}
+
+.recovery{
+  margin-top:12px;
+  padding:12px;
+  border-radius:12px;
+  background:#fff5dc;
+  border:1px solid #f1d17b
+}
+
+.recovery strong{
+  color:#8a6500
+}
+
+details summary{
+  cursor:pointer;
+  font-weight:800;
+  list-style:none
+}
+
+details summary::-webkit-details-marker{
+  display:none
+}
+
+details summary:after{
+  content:" ▾";
+  float:right
+}
+
+details[open] summary:after{
+  content:" ▴"
+}
+
+.meta-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:12px;
+  min-width:720px
+}
+
+.meta-table th,
+.meta-table td{
+  border:1px solid var(--line);
+  padding:8px;
+  text-align:center
+}
+
+.meta-table th{
+  background:#eef3f9
+}
+
+.meta-table input{
+  width:100%;
+  padding:8px;
+  border:1px solid #d8c26c;
+  border-radius:7px;
+  background:#fffbea
+}
+
+.table-wrap{
+  overflow:auto
+}
+
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px
+}
+
+.summary{
+  padding:14px;
+  border-radius:12px;
+  text-align:center;
+  font-weight:800
+}
+
+.summary b{
+  font-size:25px;
+  display:block;
+  margin-top:4px
+}
+
+.green-bg{
+  background:#e1f5e9;
+  color:var(--green)
+}
+
+.red-bg{
+  background:#fde5e5;
+  color:var(--red)
+}
+
+.yellow-bg{
+  background:#fff2c9;
+  color:#8a6500
+}
+
+.gray-bg{
+  background:#e9edf2;
+  color:#667085
+}
+
+.history{
+  width:100%;
+  border-collapse:collapse
+}
+
+.history th,
+.history td{
+  border:1px solid var(--line);
+  padding:8px;
+  text-align:center
+}
+
+.history th{
+  background:#eef3f9
+}
+
+.mode .normal-only{
+  display:none
+}
+
+.mode .proc{
+  padding:24px
+}
+
+.mode .proc h3{
+  font-size:22px
+}
+
+.mode .bar{
+  height:22px
+}
+
+.mode .stats{
+  grid-template-columns:repeat(2,1fr)
+}
+
+.mode .recovery{
+  font-size:17px
+}
+
+.note{
+  padding:10px 12px;
+  background:#eef5ff;
+  border-left:4px solid var(--blue);
+  border-radius:8px;
+  font-size:13px
+}
+
+.results-table-wrap{
+  overflow:auto
+}
+
+.results-table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1050px
+}
+
+.results-table th,
+.results-table td{
+  padding:10px 9px;
+  border-bottom:1px solid var(--line);
+  text-align:center;
+  white-space:nowrap
+}
+
+.results-table th{
+  font-size:11px;
+  color:#49617d;
+  background:#f5f8fc;
+  text-transform:uppercase;
+  letter-spacing:.2px
+}
+
+.results-table td:first-child,
+.results-table th:first-child{
+  text-align:left
+}
+
+.results-table tbody tr:hover{
+  background:#f8fbff
+}
+
+.detail-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px
+}
+
+.detail-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px
+}
+
+.detail-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px
+}
+
+.detail-head h3{
+  margin:0;
+  font-size:19px
+}
+
+.detail-mini{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:10px
+}
+
+.detail-stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:7px
+}
+
+.detail-stat{
+  background:#f6f8fb;
+  border-radius:9px;
+  padding:9px
+}
+
+.detail-stat span{
+  display:block;
+  font-size:11px;
+  color:var(--muted)
+}
+
+.detail-stat strong{
+  display:block;
+  margin-top:3px;
+  font-size:15px
+}
+
+.detail-highlight{
+  margin-top:9px;
+  padding:10px;
+  border-radius:10px;
+  background:#fff7df;
+  border:1px solid #efd27a
+}
+
+.detail-highlight.good{
+  background:#e7f7ec;
+  border-color:#b9dfc5
+}
+
+.detail-highlight.bad{
+  background:#fff0f0;
+  border-color:#efc1c1
+}
+
+.detail-highlight strong{
+  font-size:14px
 }
 
 @media(max-width:900px){
-.grid,.cards{
-grid-template-columns:1fr 1fr
-}
+  .grid,
+  .grid3,
+  .proc-grid,
+  .summary-grid,
+  .detail-grid{
+    grid-template-columns:1fr 1fr
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr
+  }
 }
 
-@media(max-width:560px){
-.grid,.cards{
-grid-template-columns:1fr
-}
+@media(max-width:600px){
+  header h1{
+    font-size:23px
+  }
+
+  .grid,
+  .grid3,
+  .proc-grid,
+  .summary-grid,
+  .detail-grid,
+  .stats{
+    grid-template-columns:1fr
+  }
+
+  .individual{
+    grid-template-columns:1fr
+  }
+
+  .time{
+    font-size:26px
+  }
 }
 </style>
 </head>
@@ -235,728 +565,2326 @@ grid-template-columns:1fr
 <body>
 
 <header>
-<h1>Calculadora THP HxH</h1>
-<p>Versão independente - esperado da hora informado manualmente e cálculo por minuto.</p>
+  <div class="wrap">
+    <h1>Calculadora THP HxH — Bruna Camilo</h1>
+    <p>Metas por hora, indicador visual e recuperação por operador.</p>
+  </div>
 </header>
 
-<div class="wrap">
+<div class="wrap" id="app">
 
-<div class="card edit">
+  <div class="card edit">
 
-<h2>1. Horário</h2>
+    <h2>⏰ Dados da operação</h2>
 
-<div class="grid">
+    <div class="grid">
 
-<div>
-<label>Hora</label>
-<input
-class="input"
-id="hour"
-type="number"
-min="0"
-max="23"
-value="8">
+      <div>
+        <label>Hora</label>
+        <select id="hour"></select>
+      </div>
+
+      <div>
+        <label>Minuto</label>
+        <select id="minute"></select>
+      </div>
+
+      <div>
+        <label>Data</label>
+        <input class="input" id="date" type="date">
+      </div>
+
+      <div>
+        <label>Turno</label>
+        <select id="shift">
+          <option value="T1">1º Turno — 07:00 às 16:00</option>
+          <option value="T2">2º Turno — 16:00 às 01:00</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="row" style="margin-top:14px">
+
+      <div class="time" id="timeDisplay">07:00</div>
+
+      <button class="primary" id="btnCalcular">
+        Calcular
+      </button>
+
+      <button class="secondary" id="btnExemplo">
+        Carregar exemplo
+      </button>
+
+      <button class="danger" id="btnLimpar" type="button">
+        🧹 Limpar quantidades
+      </button>
+
+      <button class="danger" id="btnResetHora" type="button">
+        ↺ Resetar hora
+      </button>
+
+      <button class="secondary" id="btnModo">
+        🖥️ Modo operação
+      </button>
+
+      <button class="secondary" id="btnFecharHora">
+        ➜ Fechar hora e levar saldo
+      </button>
+
+      <span class="small" id="calcMsg"></span>
+
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <details id="metasDetails">
+
+      <summary>
+        🎯 Metas por hora — preencher manualmente
+      </summary>
+
+      <p class="small">
+        Cadastre a meta base da hora e os REPs de cada processo.
+        Se uma hora terminar abaixo da meta, use
+        <b>“Fechar hora e levar saldo”</b>:
+        o que faltou vira saldo da próxima hora e é somado
+        automaticamente à meta daquele horário.
+        Tudo fica salvo somente neste navegador.
+      </p>
+
+      <div class="table-wrap">
+
+        <table class="meta-table">
+
+          <thead>
+
+            <tr>
+              <th>Hora</th>
+              <th>Picking meta base</th>
+              <th>Picking REPs</th>
+              <th>Packing meta base</th>
+              <th>Packing REPs</th>
+              <th>Atrelamento meta base</th>
+              <th>Atrelamento REPs</th>
+              <th>PutAway meta base</th>
+              <th>PutAway REPs</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="metaBody"></tbody>
+
+        </table>
+
+      </div>
+
+      <div class="row" style="margin-top:12px">
+
+        <button class="primary" id="btnSalvarMetas">
+          💾 Salvar metas
+        </button>
+
+        <button class="secondary" id="btnMetasExemplo">
+          Preencher exemplo
+        </button>
+
+      </div>
+
+    </details>
+
+  </div>
+
+
+  <div class="card edit">
+
+    <h2>
+      📦 Quantidade realizada
+      <span class="small">
+        (digite e os resultados atualizam automaticamente)
+      </span>
+    </h2>
+
+    <div class="grid">
+
+      <div>
+        <label>Picking</label>
+        <input class="input qty" id="c-p" type="number" min="0" value="0">
+      </div>
+
+      <div>
+        <label>Packing</label>
+        <input class="input qty" id="c-pa" type="number" min="0" value="0">
+      </div>
+
+      <div>
+        <label>Atrelamento</label>
+        <input class="input qty" id="c-a" type="number" min="0" value="0">
+      </div>
+
+      <div>
+        <label>PutAway</label>
+        <input class="input qty" id="c-pu" type="number" min="0" value="0">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2>
+      📊 4. Resultados automáticos —
+      <span id="resultTime">07:00</span>
+    </h2>
+
+    <div class="summary-grid" id="summary"></div>
+
+    <div class="results-table-wrap" style="margin-top:14px">
+
+      <table class="results-table">
+
+        <thead>
+
+          <tr>
+            <th>Processo</th>
+            <th>Meta/h</th>
+            <th>REPs</th>
+            <th>Realizado</th>
+            <th>Esperado %</th>
+            <th>Esperado agora</th>
+            <th>Falta</th>
+            <th>Realizado %</th>
+            <th>Δ vs esperado</th>
+            <th>Ritmo necessário/h</th>
+            <th>Status</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="resultsBody"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2>
+      🔎 Detalhamento por processo
+    </h2>
+
+    <div class="detail-grid" id="detailGrid"></div>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2>
+      📚 Histórico
+    </h2>
+
+    <div class="table-wrap">
+
+      <table class="history">
+
+        <thead>
+
+          <tr>
+            <th>Data</th>
+            <th>Turno</th>
+            <th>Hora</th>
+            <th>Picking</th>
+            <th>Packing</th>
+            <th>Atrelamento</th>
+            <th>PutAway</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="historyBody"></tbody>
+
+      </table>
+
+    </div>
+
+    <div class="row" style="margin-top:12px">
+
+      <button class="danger" id="btnLimparHistorico">
+        🗑️ Limpar histórico
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <details>
+
+      <summary>
+        📖 Como funciona
+      </summary>
+
+      <div class="small" style="line-height:1.7;margin-top:14px">
+
+        <b>Esperado %</b> =
+        minuto ÷ 60.
+        Exemplo: 36 ÷ 60 = 60%.
+
+        <br><br>
+
+        <b>Esperado agora</b> =
+        meta efetiva da hora × esperado %.
+
+        <br><br>
+
+        <b>Falta p/ esperado</b> =
+        esperado agora − realizado,
+        sem ficar negativa.
+
+        <br><br>
+
+        <b>Realizado %</b> =
+        realizado ÷ meta efetiva da hora.
+
+        <br><br>
+
+        <b>Δ vs esperado</b> =
+        realizado % − esperado %.
+
+        <br>
+        Positivo = acima do esperado.
+        Negativo = abaixo do esperado.
+
+        <br><br>
+
+        🟢 <b>Adiantado</b> =
+        produção acima do percentual esperado para aquele minuto.
+
+        <br>
+
+        🟡 <b>Ritmo perfeito</b> =
+        produção exatamente no percentual esperado para aquele minuto.
+
+        <br>
+
+        🔴 <b>Atrasado</b> =
+        produção abaixo do percentual esperado para aquele minuto.
+
+        <br>
+
+        ⚪ <b>Sem produção</b> =
+        meta e produção iguais a zero para aquele processo.
+
+        <br><br>
+
+        <b>Meta por REP</b> =
+        meta da hora ÷ quantidade de REPs.
+
+        <br><br>
+
+        <b>Ritmo atual por REP</b> =
+        produção atual ÷ REPs,
+        convertido para unidades por REP por hora.
+
+        <br><br>
+
+        <b>Recuperação por REP</b> =
+        quanto cada REP precisa produzir por hora
+        para recuperar o atraso em relação ao esperado.
+
+        <br><br>
+
+        <b>Ritmo necessário até o fim</b> =
+        quanto cada REP precisa produzir por hora
+        para completar a meta efetiva da hora.
+
+        <br><br>
+
+        <b>Fez a mais que o esperado</b> =
+        quantidade produzida acima do esperado naquele momento,
+        mostrando o total e o valor por REP.
+
+        <br><br>
+
+        <b>Fechar hora e levar saldo</b> =
+        se o realizado terminar abaixo da meta efetiva,
+        o déficit é levado para a próxima hora
+        e somado à meta base daquele horário.
+
+        <br><br>
+
+        <b>Turno 1</b> =
+        07:00 às 16:00.
+
+        <br>
+
+        <b>Turno 2</b> =
+        16:00 às 01:00.
+        A hora 00:00 pertence à continuação do segundo turno.
+
+        <br><br>
+
+        Os dados são armazenados somente no navegador
+        utilizado para esta calculadora.
+
+      </div>
+
+    </details>
+
+  </div>
+
 </div>
 
-<div>
-<label>Minuto</label>
-<input
-class="input"
-id="minute"
-type="number"
-min="0"
-max="59"
-value="36">
-</div>
 
-</div>
-
-<div class="timebox">
-Horário informado:
-<span id="timeDisplay">08:36</span>
-</div>
-
-<div class="info">
-A hora é exibida nos resultados.
-O percentual esperado dentro da hora é calculado pelo minuto:
-minuto ÷ 60.
-Portanto, 08:36 e 09:36 têm 60% do período transcorrido;
-o que muda de uma hora para outra é a meta da hora que você informar.
-</div>
-
-</div>
-
-
-<div class="card edit">
-
-<h2>2. Metas e REPs por processo</h2>
-
-<div class="grid">
-
-<div>
-<label>Picking - meta da hora</label>
-<input
-class="input"
-id="m-p"
-type="number"
-min="0"
-value="1965">
-</div>
-
-<div>
-<label>Picking - REPs</label>
-<input
-class="input"
-id="r-p"
-type="number"
-min="0"
-value="25">
-</div>
-
-<div>
-<label>Packing - meta da hora</label>
-<input
-class="input"
-id="m-pa"
-type="number"
-min="0"
-value="1382">
-</div>
-
-<div>
-<label>Packing - REPs</label>
-<input
-class="input"
-id="r-pa"
-type="number"
-min="0"
-value="8">
-</div>
-
-<div>
-<label>Atrelamento - meta da hora</label>
-<input
-class="input"
-id="m-a"
-type="number"
-min="0"
-value="706">
-</div>
-
-<div>
-<label>Atrelamento - REPs</label>
-<input
-class="input"
-id="r-a"
-type="number"
-min="0"
-value="2">
-</div>
-
-<div>
-<label>PutAway - meta da hora</label>
-<input
-class="input"
-id="m-pu"
-type="number"
-min="0"
-value="0">
-</div>
-
-<div>
-<label>PutAway - REPs</label>
-<input
-class="input"
-id="r-pu"
-type="number"
-min="0"
-value="0">
-</div>
-
-</div>
-
-<div class="note">
-Quando mudar de hora, troque as metas/REPs se os valores da nova hora forem diferentes.
-</div>
-
-</div>
-
-
-<div class="card edit">
-
-<h2>3. Produção realizada</h2>
-
-<div class="grid">
-
-<div>
-<label>Picking - coletado</label>
-<input
-class="input"
-id="c-p"
-type="number"
-min="0"
-value="0">
-</div>
-
-<div>
-<label>Packing - coletado</label>
-<input
-class="input"
-id="c-pa"
-type="number"
-min="0"
-value="0">
-</div>
-
-<div>
-<label>Atrelamento - coletado</label>
-<input
-class="input"
-id="c-a"
-type="number"
-min="0"
-value="0">
-</div>
-
-<div>
-<label>PutAway - coletado</label>
-<input
-class="input"
-id="c-pu"
-type="number"
-min="0"
-value="0">
-</div>
-
-</div>
-
-<div class="note">
-Digite a quantidade já realizada/coletada.
-</div>
-
-<div style="margin-top:12px">
-
-<button
-id="btnCalcular"
-class="primary"
-type="button">
-🧮 Calcular
-</button>
-
-<button
-id="btnExemplo"
-class="secondary"
-type="button">
-Restaurar exemplo 08:36
-</button>
-
-<span id="calcMsg"></span>
-
-</div>
-
-</div>
-
-
-<div class="card result">
-
-<h2>
-4. Resultados automáticos -
-<span id="resultTime">08:36</span>
-</h2>
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-<th>Processo</th>
-<th>Meta/h</th>
-<th>REPs</th>
-<th>Realizado</th>
-<th>Esperado %</th>
-<th>Esperado agora</th>
-<th>Falta</th>
-<th>Realizado %</th>
-<th>Δ</th>
-<th>Ritmo necessário/h</th>
-<th>Status</th>
-</tr>
-
-</thead>
-
-<tbody id="body"></tbody>
-
-</table>
-
-</div>
-
-</div>
-
-
-<div class="card result">
-
-<h2>Detalhamento</h2>
-
-<div class="cards" id="cards"></div>
-
-</div>
-
-
-<div class="card result">
-
-<h2>Como funciona</h2>
-
-<div class="info">
-
-<b>Esperado %</b> = minuto ÷ 60.
-Em 09:36, são 36 ÷ 60 = 60%.
-
-<br><br>
-
-<b>Esperado agora</b> =
-meta da hora × esperado %.
-
-<br><br>
-
-<b>Falta</b> =
-esperado agora - realizado,
-sem ficar negativa.
-
-<br><br>
-
-<b>Realizado %</b> =
-realizado ÷ meta da hora.
-
-<br><br>
-
-<b>Δ</b> =
-realizado % - esperado %.
-
-<br><br>
-
-<b>Ritmo necessário/h</b> =
-falta ÷ horas restantes.
-
-<br><br>
-
-A hora é importante para identificar qual período você está acompanhando.
-Como as metas são digitadas manualmente, a troca de hora não altera a matemática
-se o minuto e a meta permanecerem iguais.
-
-</div>
-
-</div>
-
-</div>
+<footer class="footer">
+  THP HxH — Desenvolvido por Bruna Camilo • © 2026
+</footer>
 
 
 <script>
 
-function n(id){
+const PROCS = [
 
-const el=document.getElementById(id);
+  {
+    key:'p',
+    name:'Picking',
+    meta:'m-p',
+    reps:'r-p',
+    qty:'c-p'
+  },
 
-const value=Number(el.value);
+  {
+    key:'pa',
+    name:'Packing',
+    meta:'m-pa',
+    reps:'r-pa',
+    qty:'c-pa'
+  },
 
-return Number.isFinite(value)?value:0;
+  {
+    key:'a',
+    name:'Atrelamento',
+    meta:'m-a',
+    reps:'r-a',
+    qty:'c-a'
+  },
 
-}
-
-
-function fmt(x){
-
-return Math.round(x)
-.toLocaleString('pt-BR');
-
-}
-
-
-function pct(x){
-
-return (
-x*100
-).toFixed(1)
-.replace('.',',')
-+'%';
-
-}
-
-
-function deltaPct(x){
-
-return (
-x>=0?'+':''
-)+
-(
-x*100
-).toFixed(2)
-.replace('.',',')
-+'%';
-
-}
-
-
-function getTime(){
-
-let h=Math.trunc(n('hour'));
-
-let m=Math.trunc(n('minute'));
-
-h=Math.max(0,Math.min(23,h));
-
-m=Math.max(0,Math.min(59,m));
-
-document.getElementById('hour').value=h;
-
-document.getElementById('minute').value=m;
-
-return {
-
-h,
-m,
-text:
-String(h).padStart(2,'0')
-+
-':'
-+
-String(m).padStart(2,'0')
-
-};
-
-}
-
-
-function calcProc(
-name,
-meta,
-reps,
-col,
-invert,
-expPct
-){
-
-const exp=meta*expPct;
-
-const realPct=
-meta>0
-?col/meta
-:0;
-
-const delta=
-realPct-expPct;
-
-const falta=
-Math.max(0,exp-col);
-
-const rest=
-60-getTime().m;
-
-const needed=
-(falta>0 && rest>0)
-?
-falta/(rest/60)
-:
-0;
-
-let status;
-
-if(Math.abs(delta)<0.0000001){
-
-status='Ritmo perfeito';
-
-}else{
-
-status=
-(invert?delta>0:delta<0)
-?
-'Atrasado'
-:
-'Adiantado';
-
-}
-
-return{
-
-name,
-meta,
-reps,
-col,
-expPct,
-exp,
-realPct,
-delta,
-falta,
-rest,
-needed,
-status
-
-};
-
-}
-
-
-function statusClass(s){
-
-return s==='Atrasado'
-?
-'bad'
-:
-s==='Adiantado'
-?
-'good'
-:
-'neutral';
-
-}
-
-
-function calcular(){
-
-const t=getTime();
-
-const expPct=t.m/60;
-
-document.getElementById('timeDisplay')
-.textContent=t.text;
-
-document.getElementById('resultTime')
-.textContent=t.text;
-
-
-const rows=[
-
-calcProc(
-'Picking',
-n('m-p'),
-n('r-p'),
-n('c-p'),
-false,
-expPct
-),
-
-calcProc(
-'Packing',
-n('m-pa'),
-n('r-pa'),
-n('c-pa'),
-true,
-expPct
-),
-
-calcProc(
-'Atrelamento',
-n('m-a'),
-n('r-a'),
-n('c-a'),
-false,
-expPct
-),
-
-calcProc(
-'PutAway',
-n('m-pu'),
-n('r-pu'),
-n('c-pu'),
-false,
-expPct
-)
+  {
+    key:'pu',
+    name:'PutAway',
+    meta:'m-pu',
+    reps:'r-pu',
+    qty:'c-pu'
+  }
 
 ];
 
 
-document.getElementById('body')
-.innerHTML=rows.map(r=>`
+const DEFAULT_META = {
 
-<tr>
+  7:{
+    p:{meta:1965,reps:25},
+    pa:{meta:1382,reps:8},
+    a:{meta:706,reps:2},
+    pu:{meta:0,reps:0}
+  },
 
-<td>
-<b>${r.name}</b>
-</td>
+  8:{
+    p:{meta:1965,reps:25},
+    pa:{meta:1382,reps:8},
+    a:{meta:706,reps:2},
+    pu:{meta:0,reps:0}
+  },
 
-<td>
-${fmt(r.meta)}
-</td>
-
-<td>
-${fmt(r.reps)}
-</td>
-
-<td>
-${fmt(r.col)}
-</td>
-
-<td>
-${pct(r.expPct)}
-</td>
-
-<td>
-${fmt(r.exp)}
-</td>
-
-<td>
-${fmt(r.falta)}
-</td>
-
-<td>
-${pct(r.realPct)}
-</td>
-
-<td>
-${deltaPct(r.delta)}
-</td>
-
-<td>
-${
-r.status==='Atrasado'&&r.rest
-?
-fmt(r.needed)+' unid/h'
-:
-'—'
-}
-</td>
-
-<td>
-
-<span class="tag ${statusClass(r.status)}">
-
-${r.status}
-
-</span>
-
-</td>
-
-</tr>
-
-`).join('');
-
-
-document.getElementById('cards')
-.innerHTML=rows.map(r=>`
-
-<div class="proc">
-
-<h3>${r.name}</h3>
-
-<span class="tag ${statusClass(r.status)}">
-
-${r.status}
-
-</span>
-
-<div class="metrics">
-
-<div class="m">
-<span>Meta/h</span>
-<b>${fmt(r.meta)}</b>
-</div>
-
-<div class="m">
-<span>REPs</span>
-<b>${fmt(r.reps)}</b>
-</div>
-
-<div class="m">
-<span>Esperado agora</span>
-<b>${fmt(r.exp)}</b>
-</div>
-
-<div class="m">
-<span>Realizado</span>
-<b>${fmt(r.col)}</b>
-</div>
-
-<div class="m">
-<span>Falta</span>
-<b>${fmt(r.falta)}</b>
-</div>
-
-<div class="m">
-<span>Δ</span>
-<b>${deltaPct(r.delta)}</b>
-</div>
-
-</div>
-
-</div>
-
-`).join('');
-
-
-document.getElementById('calcMsg')
-.textContent=
-'✓ Calculado às '+t.text;
-
-}
-
-
-function exemplo(){
-
-const values={
-
-hour:8,
-minute:36,
-
-'m-p':1965,
-'r-p':25,
-
-'m-pa':1382,
-'r-pa':8,
-
-'m-a':706,
-'r-a':2,
-
-'m-pu':0,
-'r-pu':0,
-
-'c-p':981,
-'c-pa':335,
-'c-a':582,
-'c-pu':0
+  9:{
+    p:{meta:2100,reps:25},
+    pa:{meta:1450,reps:8},
+    a:{meta:750,reps:2},
+    pu:{meta:0,reps:0}
+  }
 
 };
 
 
-Object.entries(values)
-.forEach(
-([id,v])=>
-document.getElementById(id).value=v
-);
+let metas = loadMetas();
 
-calcular();
+
+const SHIFT_HOURS = {
+
+  T1:[
+    7,8,9,10,11,12,13,14,15
+  ],
+
+  T2:[
+    16,17,18,19,20,21,22,23,0
+  ]
+
+};
+
+
+function clone(obj){
+
+  return JSON.parse(
+    JSON.stringify(obj)
+  );
 
 }
 
 
+function loadMetas(){
+
+  try{
+
+    const saved =
+      JSON.parse(
+        localStorage.getItem('thpMetaV5') || 'null'
+      );
+
+    return saved || clone(DEFAULT_META);
+
+  }catch(e){
+
+    return clone(DEFAULT_META);
+
+  }
+
+}
+
+
+function saveMetas(){
+
+  const rows =
+    document.querySelectorAll(
+      '#metaBody tr'
+    );
+
+  rows.forEach(tr=>{
+
+    const h =
+      Number(
+        tr.dataset.hour
+      );
+
+    if(!metas[h]){
+
+      metas[h]={
+        p:{meta:0,reps:0},
+        pa:{meta:0,reps:0},
+        a:{meta:0,reps:0},
+        pu:{meta:0,reps:0}
+      };
+
+    }
+
+    const inputs =
+      tr.querySelectorAll('input');
+
+    let i=0;
+
+    PROCS.forEach(proc=>{
+
+      metas[h][proc.key].meta =
+        Number(inputs[i++].value)||0;
+
+      metas[h][proc.key].reps =
+        Number(inputs[i++].value)||0;
+
+    });
+
+  });
+
+  localStorage.setItem(
+    'thpMetaV5',
+    JSON.stringify(metas)
+  );
+
+  updateCarryTable();
+
+  document.getElementById(
+    'calcMsg'
+  ).textContent =
+    '✓ Metas salvas neste navegador';
+
+  calcular(false);
+
+}
+
+
+function getShift(){
+
+  return document.getElementById(
+    'shift'
+  ).value;
+
+}
+
+
+function shiftLabel(){
+
+  return getShift()==='T2'
+    ? '2º Turno — 16:00 às 01:00'
+    : '1º Turno — 07:00 às 16:00';
+
+}
+
+
+function hoursForCurrentShift(){
+
+  return SHIFT_HOURS[
+    getShift()
+  ] || SHIFT_HOURS.T1;
+
+}
+
+
+function hourLabel(h){
+
+  return String(h).padStart(2,'0')+'h';
+
+}
+
+
+function buildSelectors(
+  selectedHour,
+  selectedMinute
+){
+
+  const hours =
+    hoursForCurrentShift();
+
+  const hourSelect =
+    document.getElementById('hour');
+
+  hourSelect.innerHTML =
+    hours.map(h=>
+      `<option value="${h}">${hourLabel(h)}</option>`
+    ).join('');
+
+  if(hours.includes(Number(selectedHour))){
+
+    hourSelect.value =
+      Number(selectedHour);
+
+  }else{
+
+    hourSelect.value =
+      hours[0];
+
+  }
+
+
+  const minuteSelect =
+    document.getElementById('minute');
+
+  minuteSelect.innerHTML =
+    Array.from(
+      {length:60},
+      (_,i)=>
+        `<option value="${i}">${String(i).padStart(2,'0')}</option>`
+    ).join('');
+
+  minuteSelect.value =
+    Number(selectedMinute)||0;
+
+}
+
+
+function buildMetaTable(){
+
+  const hours =
+    hoursForCurrentShift();
+
+  const tbody =
+    document.getElementById(
+      'metaBody'
+    );
+
+  tbody.innerHTML =
+    hours.map(h=>{
+
+      if(!metas[h]){
+
+        metas[h]={
+          p:{meta:0,reps:0},
+          pa:{meta:0,reps:0},
+          a:{meta:0,reps:0},
+          pu:{meta:0,reps:0}
+        };
+
+      }
+
+      return `
+
+        <tr data-hour="${h}">
+
+          <th>${hourLabel(h)}</th>
+
+          <td>
+            <input
+              type="number"
+              min="0"
+              data-f="meta"
+              value="${metas[h].p.meta}"
+            >
+          </td>
+
+          <td>
+            <input
+              type="number"
+              min="0"
+              value="${metas[h].p.reps}"
+            >
+          </td>
+
+          <td>
+            <input
+              type="number"
+              min="0"
+              data-f="meta"
+              value="${metas[h].pa.meta}"
+            >
+          </td>
+
+          <td>
+            <input
+              type="number"
+              min="0"
+              value="${metas[h].pa.reps}"
+            >
+          </td>
+
+          <td>
+            <input
+              type="number"
+              min="0"
+              data-f="meta"
+              value="${metas[h].a.meta}"
+            >
+          </td>
+
+          <td>
+            <input
+              type="number"
+              min="0"
+              value="${metas[h].a.reps}"
+            >
+          </td>
+
+          <td>
+            <input
+              type="number"
+              min="0"
+              data-f="meta"
+              value="${metas[h].pu.meta}"
+            >
+          </td>
+
+          <td>
+            <input
+              type="number"
+              min="0"
+              value="${metas[h].pu.reps}"
+            >
+          </td>
+
+        </tr>
+
+      `;
+
+    }).join('');
+
+  updateCarryTable();
+
+}
+
+
+function effectiveMeta(
+  hour,
+  key
+){
+
+  const base =
+    (metas[hour] &&
+     metas[hour][key])
+    || {
+      meta:0,
+      reps:0
+    };
+
+  const extra =
+    (carry[hour] &&
+     carry[hour][key])
+    || 0;
+
+  return {
+
+    meta:
+      (Number(base.meta)||0) +
+      (Number(extra)||0),
+
+    reps:
+      Number(base.reps)||0,
+
+    baseMeta:
+      Number(base.meta)||0,
+
+    carry:
+      Number(extra)||0
+
+  };
+
+}
+
+
+function updateCarryTable(){
+
+  document
+    .querySelectorAll(
+      '#metaBody tr'
+    )
+    .forEach(tr=>{
+
+      const h =
+        Number(
+          tr.dataset.hour
+        );
+
+      const cells =
+        tr.querySelectorAll('td');
+
+      const keys=[
+        'p',
+        'pa',
+        'a',
+        'pu'
+      ];
+
+      keys.forEach((k,i)=>{
+
+        const el =
+          cells[i*2]
+          ?.querySelector(
+            'input[data-f="meta"]'
+          );
+
+        if(el){
+
+          const extra =
+            (carry[h] &&
+             carry[h][k])
+            || 0;
+
+          el.title =
+            extra>0
+
+            ? `Meta base: ${metas[h][k].meta} + recuperação trazida: ${extra} = meta efetiva ${Number(metas[h][k].meta)+Number(extra)}`
+
+            : 'Sem saldo trazido da hora anterior';
+
+        }
+
+      });
+
+    });
+
+}
+
+
+function fmt(
+  value,
+  decimals=0
+){
+
+  return Number(
+    value||0
+  ).toLocaleString(
+    'pt-BR',
+    {
+      minimumFractionDigits:decimals,
+      maximumFractionDigits:decimals
+    }
+  );
+
+}
+
+
+function pct(
+  value
+){
+
+  return (
+    Number(value||0)*100
+  ).toFixed(1)
+    .replace('.',',')+'%';
+
+}
+
+
+function calcStatus(
+  meta,
+  actual,
+  expectedPct
+){
+
+  if(
+    Number(meta)===0 &&
+    Number(actual)===0
+  ){
+
+    return {
+      text:'Sem produção',
+      cls:'gray'
+    };
+
+  }
+
+
+  const realizedPct =
+    meta>0
+      ? actual/meta
+      : 0;
+
+  const delta =
+    realizedPct -
+    expectedPct;
+
+
+  if(
+    Math.abs(delta)
+    < 0.0000001
+  ){
+
+    return {
+      text:'Ritmo perfeito',
+      cls:'yellow'
+    };
+
+  }
+
+
+  if(delta>0){
+
+    return {
+      text:'Adiantado',
+      cls:'green'
+    };
+
+  }
+
+
+  return {
+    text:'Atrasado',
+    cls:'red'
+  };
+
+}
+
+
+function calcProcess(
+  proc,
+  effective,
+  actual,
+  minute
+){
+
+  const meta =
+    Number(effective.meta)||0;
+
+  const reps =
+    Number(effective.reps)||0;
+
+  const expectedPct =
+    Number(minute)/60;
+
+  const expected =
+    meta*expectedPct;
+
+  const realizedPct =
+    meta>0
+      ? actual/meta
+      : 0;
+
+  const delta =
+    realizedPct -
+    expectedPct;
+
+  const deficit =
+    Math.max(
+      0,
+      expected-actual
+    );
+
+  const remainingMin =
+    Math.max(
+      0,
+      60-Number(minute)
+    );
+
+  const remainingHours =
+    remainingMin/60;
+
+  const recoveryHour =
+    deficit>0 &&
+    remainingHours>0
+      ? deficit/remainingHours
+      : 0;
+
+  const fullHourPending =
+    Math.max(
+      0,
+      meta-actual
+    );
+
+  const currentRateHour =
+    Number(minute)>0
+      ? actual/(Number(minute)/60)
+      : 0;
+
+  const currentRatePerRep =
+    reps>0
+      ? currentRateHour/reps
+      : 0;
+
+  const metaPerRep =
+    reps>0
+      ? meta/reps
+      : 0;
+
+  const recoveryPerRep =
+    reps>0 &&
+    recoveryHour>0
+      ? recoveryHour/reps
+      : 0;
+
+  const closeRateHour =
+    fullHourPending>0 &&
+    remainingHours>0
+      ? fullHourPending/remainingHours
+      : 0;
+
+  const closeRatePerRep =
+    reps>0 &&
+    closeRateHour>0
+      ? closeRateHour/reps
+      : 0;
+
+  const aheadUnits =
+    Math.max(
+      0,
+      actual-expected
+    );
+
+  const aheadPerRep =
+    reps>0
+      ? aheadUnits/reps
+      : 0;
+
+  const status =
+    calcStatus(
+      meta,
+      actual,
+      expectedPct
+    );
+
+  return {
+
+    proc,
+    meta,
+    reps,
+    actual,
+
+    expectedPct,
+    expected,
+
+    realizedPct,
+    delta,
+
+    deficit,
+
+    remainingMin,
+    remainingHours,
+
+    recoveryHour,
+
+    fullHourPending,
+
+    currentRateHour,
+    currentRatePerRep,
+
+    metaPerRep,
+
+    recoveryPerRep,
+
+    closeRateHour,
+    closeRatePerRep,
+
+    aheadUnits,
+    aheadPerRep,
+
+    status
+
+  };
+
+}
+
+
+function renderProcess(
+  proc,
+  r
+){
+
+  const id =
+    'proc-'+proc.key;
+
+  const el =
+    document.getElementById(id);
+
+  if(!el)return;
+
+  const fill =
+    Math.min(
+      100,
+      Math.max(
+        0,
+        r.realizedPct*100
+      )
+    );
+
+  el.querySelector(
+    '.fill'
+  ).style.width =
+    fill+'%';
+
+  el.querySelector(
+    '.status'
+  ).innerHTML =
+    `<span class="badge ${r.status.cls}">
+      ${r.status.text}
+    </span>`;
+
+}
+
+
+function renderResultsTable(
+  results
+){
+
+  document.getElementById(
+    'resultsBody'
+  ).innerHTML =
+
+    PROCS.map(proc=>{
+
+      const r =
+        results[proc.key];
+
+      const actual =
+        Number(
+          document.getElementById(
+            proc.qty
+          ).value
+        )||0;
+
+      const rate =
+
+        (
+          r.status.text===
+          'Sem produção' ||
+          r.deficit<=0 ||
+          r.remainingMin<=0
+        )
+
+        ?
+
+        (
+          r.status.text===
+          'Sem produção'
+            ? '0 unid/h'
+            : '—'
+        )
+
+        :
+
+        fmt(
+          r.recoveryHour
+        )+
+        ' unid/h';
+
+      return `
+
+        <tr>
+
+          <td>
+            <b>${proc.name}</b>
+          </td>
+
+          <td>
+            ${fmt(r.meta)}
+          </td>
+
+          <td>
+            ${fmt(r.reps)}
+          </td>
+
+          <td>
+            ${fmt(actual)}
+          </td>
+
+          <td>
+            ${pct(r.expectedPct)}
+          </td>
+
+          <td>
+            ${fmt(r.expected)}
+          </td>
+
+          <td>
+            ${fmt(r.deficit)}
+          </td>
+
+          <td>
+            ${pct(r.realizedPct)}
+          </td>
+
+          <td>
+            ${r.delta>=0?'+':''}${pct(r.delta)}
+          </td>
+
+          <td>
+            ${rate}
+          </td>
+
+          <td>
+            <span class="badge ${r.status.cls}">
+              ${r.status.text}
+            </span>
+          </td>
+
+        </tr>
+
+      `;
+
+    }).join('');
+
+}
+
+
+function renderDetailGrid(
+  results
+){
+
+  document.getElementById(
+    'detailGrid'
+  ).innerHTML =
+
+    PROCS.map(proc=>{
+
+      const r =
+        results[proc.key];
+
+      const actual =
+        Number(
+          document.getElementById(
+            proc.qty
+          ).value
+        )||0;
+
+      let highlight='';
+
+
+      if(
+        r.status.text===
+        'Sem produção'
+      ){
+
+        highlight=`
+
+          <div class="detail-highlight">
+
+            ⚪
+            <strong>
+              Sem produção
+            </strong>
+
+            <br>
+
+            Não há meta cadastrada
+            para esta hora.
+
+          </div>
+
+        `;
+
+      }
+
+      else if(
+        r.aheadUnits>0
+      ){
+
+        highlight=`
+
+          <div class="detail-highlight good">
+
+            🟢
+
+            <strong>
+              Fez a mais que o esperado:
+            </strong>
+
+            ${fmt(r.aheadUnits,1)}
+            unid no total
+
+            ·
+
+            ${fmt(r.aheadPerRep,1)}
+            unid/REP.
+
+          </div>
+
+        `;
+
+      }
+
+      else if(
+        r.deficit>0
+      ){
+
+        highlight=`
+
+          <div class="detail-highlight bad">
+
+            🔴
+
+            <strong>
+              Falta para o esperado agora:
+            </strong>
+
+            ${fmt(r.deficit)}
+            unid
+
+            ·
+
+            ${
+              r.reps>0
+                ? fmt(
+                    r.deficit/r.reps,
+                    1
+                  )+
+                  ' unid/REP'
+                : ''
+            }.
+
+          </div>
+
+        `;
+
+      }
+
+      else{
+
+        highlight=`
+
+          <div class="detail-highlight">
+
+            🟡
+
+            <strong>
+              Ritmo perfeito:
+            </strong>
+
+            o realizado está no
+            percentual esperado
+            para este minuto.
+
+          </div>
+
+        `;
+
+      }
+
+
+      return `
+
+        <div class="detail-card">
+
+          <div class="detail-head">
+
+            <h3>
+              ${proc.name}
+            </h3>
+
+            <span class="badge ${r.status.cls}">
+              ${r.status.text}
+            </span>
+
+          </div>
+
+
+          <div class="detail-mini">
+
+            Meta/h:
+            <b>${fmt(r.meta)}</b>
+
+            ·
+
+            REPs:
+            <b>${fmt(r.reps)}</b>
+
+            ·
+
+            Realizado:
+            <b>${fmt(actual)}</b>
+
+          </div>
+
+
+          <div class="detail-stats">
+
+            <div class="detail-stat">
+              <span>
+                Esperado agora
+              </span>
+              <strong>
+                ${fmt(r.expected)}
+              </strong>
+            </div>
+
+
+            <div class="detail-stat">
+              <span>
+                Realizado %
+              </span>
+              <strong>
+                ${pct(r.realizedPct)}
+              </strong>
+            </div>
+
+
+            <div class="detail-stat">
+              <span>
+                Falta p/ esperado
+              </span>
+              <strong>
+                ${fmt(r.deficit)}
+              </strong>
+            </div>
+
+
+            <div class="detail-stat">
+              <span>
+                Δ vs esperado
+              </span>
+              <strong>
+                ${r.delta>=0?'+':''}${pct(r.delta)}
+              </strong>
+            </div>
+
+
+            <div class="detail-stat">
+              <span>
+                Meta por REP
+              </span>
+              <strong>
+                ${
+                  r.reps>0
+                    ? fmt(
+                        r.metaPerRep,
+                        1
+                      )+
+                      ' unid/REP/h'
+                    : '—'
+                }
+              </strong>
+            </div>
+
+
+            <div class="detail-stat">
+              <span>
+                Ritmo atual por REP
+              </span>
+              <strong>
+                ${
+                  r.reps>0
+                    ? fmt(
+                        r.currentRatePerRep,
+                        1
+                      )+
+                      ' unid/REP/h'
+                    : '—'
+                }
+              </strong>
+            </div>
+
+
+            <div class="detail-stat">
+              <span>
+                Recuperação por REP
+              </span>
+              <strong>
+                ${
+                  r.reps>0 &&
+                  r.deficit>0 &&
+                  r.remainingMin>0
+                    ? fmt(
+                        r.recoveryPerRep,
+                        1
+                      )+
+                      ' unid/REP/h'
+                    : '—'
+                }
+              </strong>
+            </div>
+
+
+            <div class="detail-stat">
+              <span>
+                Ritmo necessário até o fim
+              </span>
+              <strong>
+                ${
+                  r.reps>0 &&
+                  r.remainingMin>0
+                    ? fmt(
+                        r.closeRatePerRep,
+                        1
+                      )+
+                      ' unid/REP/h'
+                    : '—'
+                }
+              </strong>
+            </div>
+
+          </div>
+
+
+          ${highlight}
+
+        </div>
+
+      `;
+
+    }).join('');
+
+}
+
+
+function loadCarry(){
+
+  try{
+
+    return JSON.parse(
+      localStorage.getItem(
+        'thpCarryV5'
+      )||'{}'
+    );
+
+  }catch(e){
+
+    return {};
+
+  }
+
+}
+
+
+function saveCarry(c){
+
+  localStorage.setItem(
+    'thpCarryV5',
+    JSON.stringify(c)
+  );
+
+}
+
+
+let carry =
+  loadCarry();
+
+
+function closeHourToNext(){
+
+  const h =
+    Number(
+      document.getElementById(
+        'hour'
+      ).value
+    );
+
+  const hours =
+    hoursForCurrentShift();
+
+  const idx =
+    hours.indexOf(h);
+
+  const next =
+    idx>=0 &&
+    idx<hours.length-1
+      ? hours[idx+1]
+      : null;
+
+
+  if(next===null){
+
+    document.getElementById(
+      'calcMsg'
+    ).textContent =
+      `ℹ️ A última hora do ${shiftLabel()} foi fechada. Não há próxima hora dentro deste turno.`;
+
+    return;
+
+  }
+
+
+  const nextCarry={
+    p:0,
+    pa:0,
+    a:0,
+    pu:0
+  };
+
+
+  PROCS.forEach(proc=>{
+
+    const actual =
+      Number(
+        document.getElementById(
+          proc.qty
+        ).value
+      )||0;
+
+    const effective =
+      effectiveMeta(
+        h,
+        proc.key
+      );
+
+    nextCarry[
+      proc.key
+    ] =
+      Math.max(
+        Number(effective.meta)-
+        actual,
+        0
+      );
+
+  });
+
+
+  carry[next]=
+    nextCarry;
+
+  saveCarry(carry);
+
+  updateCarryTable();
+
+
+  document.getElementById(
+    'hour'
+  ).value=next;
+
+  document.getElementById(
+    'minute'
+  ).value=0;
+
+
+  document
+    .querySelectorAll(
+      '.qty'
+    )
+    .forEach(
+      x=>x.value=0
+    );
+
+
+  calcular(false);
+
+
+  document.getElementById(
+    'calcMsg'
+  ).textContent =
+    `✓ Hora ${hourLabel(h)} fechada. Saldo levado para ${hourLabel(next)}.`;
+
+}
+
+
+function calcular(
+  addHistory=true
+){
+
+  const h =
+    Number(
+      document.getElementById(
+        'hour'
+      ).value
+    );
+
+  const min =
+    Number(
+      document.getElementById(
+        'minute'
+      ).value
+    );
+
+
+  const time =
+    String(h).padStart(2,'0')+
+    ':'+
+    String(min).padStart(2,'0');
+
+
+  document.getElementById(
+    'timeDisplay'
+  ).textContent=time;
+
+  document.getElementById(
+    'resultTime'
+  ).textContent=time;
+
+
+  const results={};
+
+
+  PROCS.forEach(proc=>{
+
+    const meta =
+      effectiveMeta(
+        h,
+        proc.key
+      );
+
+    const actual =
+      Number(
+        document.getElementById(
+          proc.qty
+        ).value
+      )||0;
+
+
+    results[
+      proc.key
+    ] =
+      calcProcess(
+        proc,
+        meta,
+        actual,
+        min
+      );
+
+  });
+
+
+  renderResultsTable(
+    results
+  );
+
+  renderDetailGrid(
+    results
+  );
+
+
+  const counts={
+    green:0,
+    red:0,
+    yellow:0,
+    gray:0
+  };
+
+
+  PROCS.forEach(
+    p=>
+      counts[
+        results[p.key]
+          .status.cls
+      ]++
+  );
+
+
+  document.getElementById(
+    'summary'
+  ).innerHTML=`
+
+    <div class="summary green-bg">
+
+      🟢 Adiantado
+
+      <b>
+        ${counts.green}
+      </b>
+
+    </div>
+
+
+    <div class="summary yellow-bg">
+
+      🟡 Ritmo perfeito
+
+      <b>
+        ${counts.yellow}
+      </b>
+
+    </div>
+
+
+    <div class="summary red-bg">
+
+      🔴 Atrasado
+
+      <b>
+        ${counts.red}
+      </b>
+
+    </div>
+
+
+    <div class="summary gray-bg">
+
+      ⚪ Sem produção
+
+      <b>
+        ${counts.gray}
+      </b>
+
+    </div>
+
+  `;
+
+
+  document.getElementById(
+    'calcMsg'
+  ).textContent =
+    `✓ Calculado às ${time}`;
+
+
+  if(addHistory){
+
+    addHistoryRow(
+      time,
+      results
+    );
+
+  }
+
+}
+
+
+function addHistoryRow(
+  time,
+  results
+){
+
+  const date =
+    document.getElementById(
+      'date'
+    ).value||'';
+
+
+  const row={
+
+    date,
+
+    shift:
+      getShift(),
+
+    time,
+
+    p:
+      results.p.status.text,
+
+    pa:
+      results.pa.status.text,
+
+    a:
+      results.a.status.text,
+
+    pu:
+      results.pu.status.text
+
+  };
+
+
+  let hist=[];
+
+
+  try{
+
+    hist=
+      JSON.parse(
+        localStorage.getItem(
+          'thpHistoryV5'
+        )||'[]'
+      );
+
+  }catch(e){
+
+    hist=[];
+
+  }
+
+
+  hist.unshift(row);
+
+  hist=
+    hist.slice(0,50);
+
+
+  localStorage.setItem(
+    'thpHistoryV5',
+    JSON.stringify(hist)
+  );
+
+
+  renderHistory();
+
+}
+
+
+function renderHistory(){
+
+  let hist=[];
+
+
+  try{
+
+    hist=
+      JSON.parse(
+        localStorage.getItem(
+          'thpHistoryV5'
+        )||'[]'
+      );
+
+  }catch(e){
+
+    hist=[];
+
+  }
+
+
+  document.getElementById(
+    'historyBody'
+  ).innerHTML =
+
+    hist.map(
+      x=>`
+
+        <tr>
+
+          <td>
+            ${x.date}
+          </td>
+
+          <td>
+            ${x.shift||"T1"}
+          </td>
+
+          <td>
+            ${x.time}
+          </td>
+
+          <td>
+            ${x.p}
+          </td>
+
+          <td>
+            ${x.pa}
+          </td>
+
+          <td>
+            ${x.a}
+          </td>
+
+          <td>
+            ${x.pu}
+          </td>
+
+        </tr>
+
+      `
+    ).join('')
+
+    ||
+
+    `
+      <tr>
+        <td colspan="7">
+          Nenhum cálculo salvo.
+        </td>
+      </tr>
+    `;
+
+}
+
+
+function fillExample(){
+
+  document.getElementById(
+    'shift'
+  ).value='T1';
+
+
+  buildSelectors(
+    8,
+    36
+  );
+
+
+  carry={};
+
+  saveCarry(
+    carry
+  );
+
+
+  metas=
+    clone(
+      DEFAULT_META
+    );
+
+
+  metas[7]={
+    p:{meta:1965,reps:25},
+    pa:{meta:1382,reps:8},
+    a:{meta:706,reps:2},
+    pu:{meta:0,reps:0}
+  };
+
+
+  metas[8]={
+    p:{meta:1965,reps:25},
+    pa:{meta:1382,reps:8},
+    a:{meta:706,reps:2},
+    pu:{meta:0,reps:0}
+  };
+
+
+  metas[9]={
+    p:{meta:2100,reps:25},
+    pa:{meta:1450,reps:8},
+    a:{meta:750,reps:2},
+    pu:{meta:0,reps:0}
+  };
+
+
+  metas[16]={
+    p:{meta:1965,reps:25},
+    pa:{meta:1382,reps:8},
+    a:{meta:706,reps:2},
+    pu:{meta:0,reps:0}
+  };
+
+
+  localStorage.setItem(
+    'thpMetaV5',
+    JSON.stringify(
+      metas
+    )
+  );
+
+
+  buildMetaTable();
+
+
+  document.getElementById(
+    'hour'
+  ).value=8;
+
+  document.getElementById(
+    'minute'
+  ).value=36;
+
+
+  document.getElementById(
+    'c-p'
+  ).value=981;
+
+  document.getElementById(
+    'c-pa'
+  ).value=335;
+
+  document.getElementById(
+    'c-a'
+  ).value=582;
+
+  document.getElementById(
+    'c-pu'
+  ).value=0;
+
+
+  calcular(false);
+
+
+  document.getElementById(
+    'metasDetails'
+  ).open=false;
+
+}
+
+
+function clearProduction(){
+
+  [
+    'c-p',
+    'c-pa',
+    'c-a',
+    'c-pu'
+  ].forEach(
+    id=>{
+      document.getElementById(
+        id
+      ).value='0';
+    }
+  );
+
+
+  document.getElementById(
+    'calcMsg'
+  ).textContent =
+    '✓ Quantidades de produção limpas';
+
+
+  calcular(false);
+
+}
+
+
+function resetHora(){
+
+  const h =
+    Number(
+      document.getElementById(
+        'hour'
+      ).value
+    );
+
+
+  if(carry[h]){
+
+    delete carry[h];
+
+    saveCarry(
+      carry
+    );
+
+  }
+
+
+  clearProduction();
+
+
+  document.getElementById(
+    'minute'
+  ).value=0;
+
+
+  calcular(false);
+
+
+  document.getElementById(
+    'calcMsg'
+  ).textContent =
+    `✓ Hora ${String(h).padStart(2,'0')} resetada; metas base preservadas`;
+
+}
+
+
+function toggleMode(){
+
+  document.getElementById(
+    'app'
+  ).classList.toggle(
+    'mode'
+  );
+
+
+  document.getElementById(
+    'btnModo'
+  ).textContent =
+
+    document
+      .getElementById('app')
+      .classList.contains('mode')
+
+      ?
+
+      '↩️ Modo normal'
+
+      :
+
+      '🖥️ Modo operação';
+
+}
+
+
+function clearHistory(){
+
+  localStorage.removeItem(
+    'thpHistoryV5'
+  );
+
+  renderHistory();
+
+}
+
+
+function changeShift(){
+
+  const currentHour =
+    Number(
+      document.getElementById(
+        'hour'
+      ).value
+    );
+
+  const currentMinute =
+    Number(
+      document.getElementById(
+        'minute'
+      ).value
+    );
+
+
+  const hours =
+    hoursForCurrentShift();
+
+
+  const selected =
+    hours.includes(
+      currentHour
+    )
+      ? currentHour
+      : hours[0];
+
+
+  buildSelectors(
+    selected,
+    currentMinute
+  );
+
+
+  buildMetaTable();
+
+
+  calcular(false);
+
+
+  document.getElementById(
+    'calcMsg'
+  ).textContent =
+    `✓ ${shiftLabel()}`;
+
+}
+
+
+buildSelectors(
+  8,
+  36
+);
+
+buildMetaTable();
+
+updateCarryTable();
+
+renderHistory();
+
+calcular(false);
+
+
+document.getElementById(
+  'btnCalcular'
+).onclick=
+  ()=>calcular(true);
+
+
+document.getElementById(
+  'btnExemplo'
+).onclick=
+  fillExample;
+
+
+document.getElementById(
+  'btnLimpar'
+).onclick=
+  clearProduction;
+
+
+document.getElementById(
+  'btnResetHora'
+).onclick=
+  resetHora;
+
+
+document.getElementById(
+  'btnModo'
+).onclick=
+  toggleMode;
+
+
+document.getElementById(
+  'btnFecharHora'
+).onclick=
+  closeHourToNext;
+
+
+document.getElementById(
+  'btnSalvarMetas'
+).onclick=
+  saveMetas;
+
+
+document.getElementById(
+  'btnMetasExemplo'
+).onclick=
+  fillExample;
+
+
+document.getElementById(
+  'btnLimparHistorico'
+).onclick=
+  clearHistory;
+
+
 document
-.querySelectorAll('input')
-.forEach(
-el=>
-el.addEventListener(
-'input',
-calcular
-)
+  .querySelectorAll(
+    '#hour,#minute,#date'
+  )
+  .forEach(
+    x=>
+      x.addEventListener(
+        'change',
+        ()=>calcular(false)
+      )
+  );
+
+
+document.getElementById(
+  'shift'
+).addEventListener(
+  'change',
+  changeShift
 );
 
 
 document
-.getElementById('btnCalcular')
-.addEventListener(
-'click',
-calcular
-);
-
-
-document
-.getElementById('btnExemplo')
-.addEventListener(
-'click',
-exemplo
-);
-
-
-calcular();
+  .querySelectorAll(
+    '.qty'
+  )
+  .forEach(
+    x=>
+      x.addEventListener(
+        'input',
+        ()=>calcular(false)
+      )
+  );
 
 </script>
 
