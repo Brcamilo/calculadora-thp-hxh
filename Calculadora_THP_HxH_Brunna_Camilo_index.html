@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculadora THP HxH — Independente</title>
+<style>
+:root{--blue:#224f9a;--dark:#323d4c;--bg:#f4f7fb;--line:#dce4ef;--red:#c62828;--green:#16834a;--orange:#b86b00}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--dark);font-family:Arial,sans-serif}
+header{background:linear-gradient(135deg,#224f9a,#17376f);color:#fff;padding:22px}header h1{margin:0 0 6px}header p{margin:0;opacity:.9}
+.wrap{max-width:1250px;margin:18px auto;padding:0 15px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 4px 16px rgba(30,50,80,.07)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.input{background:#fffbea;border:2px solid #e3bd3a;border-radius:10px;padding:11px;width:100%;font-size:16px}
+label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}.btn{padding:11px 15px;border:0;border-radius:10px;font-weight:700;cursor:pointer}.primary{background:var(--blue);color:#fff}.secondary{background:#e8edf5;color:var(--dark)}
+.help{font-size:12px;color:#69778a;line-height:1.5}.tag{display:inline-block;padding:6px 9px;border-radius:999px;font-size:11px;font-weight:800}.bad{background:#ffebee;color:var(--red)}.good{background:#e9f7ef;color:var(--green)}.neutral{background:#edf1f5;color:#526071}
+.table-wrap{overflow:auto}table{width:100%;min-width:1100px;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:right}th:first-child,td:first-child{text-align:left}th{font-size:11px;color:#69778a;background:#f7f9fc;text-transform:uppercase}td{font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.proc{border:1px solid var(--line);border-radius:13px;padding:14px}.proc h3{margin:0 0 10px}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.m{background:#f7f9fc;border-radius:8px;padding:8px}.m span{display:block;font-size:10px;color:#738094}.m b{font-size:14px}
+.recovery{margin-top:10px;padding:10px;border-radius:9px;background:#fff5e5;border-left:4px solid var(--orange);font-size:12px}.recovery.ok{background:#eef9f3;border-left-color:var(--green)}
+.info{background:#f7f9fc;border-radius:10px;padding:12px;margin-top:10px;font-size:12px;line-height:1.55}
+.editable-box{border:2px solid #f2c94c;background:#fffdf2}
+.editable-title{display:flex;gap:8px;align-items:center}
+.editable-title:before{content:'✏️'}
+.result-box{border:2px solid #b8c7dc;background:#fbfcfe}
+.result-title{display:flex;gap:8px;align-items:center}
+.result-title:before{content:'🔒'}
+.editable-note{background:#fff8d8;border-left:4px solid #f2c94c;padding:10px 12px;border-radius:8px;font-size:12px;line-height:1.5;margin-top:10px}
+.result-note{background:#eef4fb;border-left:4px solid #224f9a;padding:10px 12px;border-radius:8px;font-size:12px;line-height:1.5;margin-top:10px}
+@media(max-width:900px){.grid,.cards{grid-template-columns:1fr 1fr}}@media(max-width:560px){.grid,.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><h1>Calculadora THP HxH</h1><p>Versão independente — campos editáveis separados dos resultados automáticos.</p></header>
+<div class="wrap">
+
+<div class="card editable-box">
+<h2 class="editable-title" style="margin-top:0">DADOS QUE VOCÊ PODE ALTERAR</h2>
+<div class="editable-note"><b>Altere somente os campos desta área.</b> Você pode mudar hora, minuto, metas, REPs e quantidades realizadas. Os resultados abaixo são calculados automaticamente.</div>
+<h3>1. Horário</h3>
+<div class="grid">
+<div><label>Hora</label><input class="input" id="hour" type="number" min="0" max="23" value="8"></div>
+<div><label>Minuto</label><input class="input" id="minute" type="number" min="0" max="59" value="36"></div>
+</div>
+<div class="help" style="margin-top:10px">Hora e minuto são entradas manuais. Ex.: 08:36 → esperado de 60% da hora.</div>
+</div>
+
+<div class="card editable-box">
+<h3 style="margin-top:0">2. Metas e REPs por processo</h3>
+<div class="grid">
+<div><label>Picking — meta</label><input class="input" id="m-p" type="number" min="0" value="1965"></div>
+<div><label>Picking — REPs</label><input class="input" id="r-p" type="number" min="0" value="25"></div>
+<div><label>Packing — meta</label><input class="input" id="m-pa" type="number" min="0" value="1382"></div>
+<div><label>Packing — REPs</label><input class="input" id="r-pa" type="number" min="0" value="8"></div>
+<div><label>Atrelamento — meta</label><input class="input" id="m-a" type="number" min="0" value="706"></div>
+<div><label>Atrelamento — REPs</label><input class="input" id="r-a" type="number" min="0" value="2"></div>
+<div><label>PutAway — meta</label><input class="input" id="m-pu" type="number" min="0" value="0"></div>
+<div><label>PutAway — REPs</label><input class="input" id="r-pu" type="number" min="0" value="0"></div>
+</div>
+<div class="editable-note"><b>Metas e REPs:</b> altere quando os números da operação mudarem. A calculadora não acessa nem grava nada na planilha da empresa.</div>
+</div>
+
+<div class="card editable-box">
+<h3 style="margin-top:0">3. Produção realizada</h3>
+<div class="grid">
+<div><label>Picking — coletado</label><input class="input" id="c-p" type="number" min="0" value="0"></div>
+<div><label>Packing — coletado</label><input class="input" id="c-pa" type="number" min="0" value="0"></div>
+<div><label>Atrelamento — coletado</label><input class="input" id="c-a" type="number" min="0" value="0"></div>
+<div><label>PutAway — coletado</label><input class="input" id="c-pu" type="number" min="0" value="0"></div>
+</div>
+<div class="editable-note"><b>Produção realizada:</b> digite apenas o que já foi realizado/coletado em cada processo.</div><div style="margin-top:12px"><button class="btn primary" onclick="calcular()">Calcular</button><button class="btn secondary" onclick="exemplo()">Restaurar exemplo 08:36</button></div>
+</div>
+
+<div class="card result-box"><h2 class="result-title" style="margin-top:0">RESULTADOS AUTOMÁTICOS</h2><div class="result-note"><b>Não precisa alterar nada aqui.</b> Esta área é recalculada automaticamente sempre que você muda um campo amarelo acima.</div><h3>Resumo</h3><div class="table-wrap"><table><thead><tr>
+<th>Processo</th><th>Meta/h</th><th>REPs</th><th>Realizado</th><th>Esperado %</th><th>Esperado agora</th><th>Falta</th><th>Realizado %</th><th>Δ</th><th>Ritmo necessário/h</th><th>Status</th>
+</tr></thead><tbody id="body"></tbody></table></div></div>
+
+<div class="card result-box"><h3 style="margin-top:0">Detalhamento automático</h3><div class="cards" id="cards"></div></div>
+
+<div class="card result-box"><h3 style="margin-top:0">Entenda os resultados</h3>
+<div class="info"><b>Esperado %:</b> minutos decorridos ÷ 60. Em 08:36, são 36 ÷ 60 = 60%.</div>
+<div class="info"><b>Esperado agora:</b> meta da hora × esperado %. Ex.: 1.965 × 60% = 1.179.</div>
+<div class="info"><b>Falta:</b> esperado agora − realizado, considerando somente o valor positivo.</div>
+<div class="info"><b>Δ:</b> percentual realizado − percentual esperado.</div>
+<div class="info"><b>Ritmo necessário/h:</b> falta ÷ horas restantes. Ex.: 198 unidades ÷ 0,4 h = 495 unid/h.</div>
+<div class="info"><b>Status:</b> mantém a lógica original informada para a calculadora. Packing possui a regra invertida em relação aos demais processos.</div>
+<div class="info"><b>Importante:</b> esta versão é independente. Ela não lê, não escreve e não modifica sua planilha corporativa.</div>
+</div>
+</div>
+
+<script>
+function v(id){return Number(document.getElementById(id).value)||0}
+function fmt(x){return Math.round(x).toLocaleString('pt-BR')}
+function pct(x){return (x*100).toFixed(1).replace('.',',')+'%'}
+function spct(x){return (x>=0?'+':'')+(x*100).toFixed(2).replace('.',',')+'%'}
+function calcProc(name,meta,reps,col,invert){
+ const min=Math.max(0,Math.min(59,v('minute')));
+ const expPct=min/60, exp=meta*expPct, realPct=meta?col/meta:0, delta=realPct-expPct;
+ const ritmo=col-exp, falta=Math.max(0,exp-col), rest=60-min;
+ const needed=falta&&rest?falta/(rest/60):0;
+ let status;
+ if(Math.abs(ritmo)<1e-9)status='Ritmo perfeito';
+ else status=(invert?ritmo>0:ritmo<0)?'Atrasado':'Adiantado';
+ return {name,meta,reps,col,expPct,exp,realPct,delta,falta,rest,needed,status}
+}
+function render(r){
+ const cls=r.status==='Atrasado'?'bad':r.status==='Adiantado'?'good':'neutral';
+ const rec=r.status==='Atrasado'
+ ? (r.rest?`<div class="recovery"><b>🚀 Recuperação:</b> faltam <b>${fmt(r.falta)}</b> unidades. É necessário manter cerca de <b>${fmt(r.needed)} unid/h</b> (${(r.needed/60).toFixed(1).replace('.',',')} unid/min).</div>`:`<div class="recovery"><b>⏱ Hora encerrada:</b> faltam ${fmt(r.falta)} unidades.</div>`)
+ : `<div class="recovery ok"><b>✓</b> Não precisa recuperar neste momento.</div>`;
+ return `<div class="proc"><h3>${r.name}</h3><span class="tag ${cls}">${r.status}</span><div class="metrics">
+ <div class="m"><span>Meta/h</span><b>${fmt(r.meta)}</b></div><div class="m"><span>REPs</span><b>${fmt(r.reps)}</b></div>
+ <div class="m"><span>Esperado agora</span><b>${fmt(r.exp)}</b></div><div class="m"><span>Realizado</span><b>${fmt(r.col)}</b></div>
+ <div class="m"><span>Falta</span><b>${fmt(r.falta)}</b></div><div class="m"><span>Δ</span><b>${spct(r.delta)}</b></div>
+ </div>${rec}</div>`
+}
+function calcular(){
+ const rows=[
+ calcProc('Picking',v('m-p'),v('r-p'),v('c-p'),false),
+ calcProc('Packing',v('m-pa'),v('r-pa'),v('c-pa'),true),
+ calcProc('Atrelamento',v('m-a'),v('r-a'),v('c-a'),false),
+ calcProc('PutAway',v('m-pu'),v('r-pu'),v('c-pu'),false)
+ ];
+ document.getElementById('body').innerHTML=rows.map(r=>`<tr><td><b>${r.name}</b></td><td>${fmt(r.meta)}</td><td>${fmt(r.reps)}</td><td>${fmt(r.col)}</td><td>${pct(r.expPct)}</td><td>${fmt(r.exp)}</td><td>${fmt(r.falta)}</td><td>${pct(r.realPct)}</td><td>${spct(r.delta)}</td><td>${r.status==='Atrasado'&&r.rest?fmt(r.needed)+' unid/h':'—'}</td><td><span class="tag ${r.status==='Atrasado'?'bad':r.status==='Adiantado'?'good':'neutral'}">${r.status}</span></td></tr>`).join('');
+ document.getElementById('cards').innerHTML=rows.map(render).join('');
+}
+function exemplo(){
+ const vals={hour:8,minute:36,'m-p':1965,'r-p':25,'m-pa':1382,'r-pa':8,'m-a':706,'r-a':2,'m-pu':0,'r-pu':0,'c-p':981,'c-pa':335,'c-a':582,'c-pu':0};
+ for(const k in vals)document.getElementById(k).value=vals[k];
+ calcular();
+}
+document.querySelectorAll('input').forEach(x=>x.addEventListener('input',calcular));
+calcular();
+</script>
+</body></html>
